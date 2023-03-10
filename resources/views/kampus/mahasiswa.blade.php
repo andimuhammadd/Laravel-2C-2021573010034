@@ -13,7 +13,7 @@
     <div class="container text-center mt-3 pt-3 bg-white">
         <h1 class="bg-dark px-3 py-1 text-center mt-3 pt-3 bg-white d-inline-block">{{ $nama }}</h1>
         <br>
-        @foreach ($nilai as $val)
+        @forelse ($nilai as $val)
         @if(($val >=0) and ($val < 50 )) <div class="alert alert-danger d-inline-block">
             {{ $val }}
     </div>
@@ -21,7 +21,9 @@
         {{ $val }}
         </div>
         @endif
-        @endforeach
+        @empty
+        <div class="alert alert-dark d-inline-block">Tidak ada data...</div>
+        @endforelse
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
