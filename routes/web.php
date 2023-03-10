@@ -121,7 +121,7 @@ Route::get('/home', function () {
 });
 
 Route::get('/mahasiswa', function () {
-    $nama = 'Vladimir Putin';
+    $nama = 'Tya Kirana Putri';
     $nilai = [80, 64, 30, 76, 95];
     return view('kampus.mahasiswa', compact('nama', 'nilai'));
 });
