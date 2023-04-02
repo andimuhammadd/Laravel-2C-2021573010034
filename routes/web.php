@@ -13,115 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route bawaan laravel
 Route::get('/', function () {
     return view('welcome');
 });
 
-//Membuat Route
-Route::get('/hello', function () {
-    return 'Hello World';
+Route::get('mahasiswa', function () {
+    $arrMahasiswa = ["Luhut", "Jokowi", "Vladimir Putin", "Lisa Permata"];
+    return view('mahasiswa')->with('mahasiswa', $arrMahasiswa);
 });
 
-Route::get('/belajar', function () {
-    echo '<h1>Hello World</h1>';
-    echo '<p>Sedang belajar Laravel</p>';
+Route::get('dosen', function () {
+    $arrDosen = ["Maya, M.M", "Prof. Silvia Nst, M.Farm", "Dr. Umar Agustinus", "Dr. Syahrial, M.kom"];
+    return view('dosen')->with('dosen', $arrDosen);
 });
 
-Route::get('/mahasiswa/profil/coba', function () {
-    echo '<h2 style="text-align: center"><u>Welcome Profil Coba</u></h2>';
+Route::get('gallery', function () {
+    return view('gallery');
 });
 
-//Route dengan parameter
-Route::get('/mahasiswa/{nama}', function ($nama) {
-    return "Tampilkan data mahasiswa bernama $nama";
+Route::get('admin', function () {
+    return view('admin');
 });
 
-//Route parameter dengan dua parameter
-Route::get('/stock_barang/{jenis}/{merek}', function ($jenis, $merek) {
-    return "Cek sisa stok untuk $jenis $merek";
-});
+Route::get('/', [App\Http\Controller\PageControllers::class, 'index']);
 
-Route::get('/stock_barang/{jenis}/{merek}', function ($a, $b) {
-    return "Cek sisa stok untuk $a $b";
-});
-
-//Route dengan Optional parameter
-Route::get(
-    '/stock_barang/{jenis?}/{merek?}',
-    function ($a = 'Smartphone', $b = 'Samsung') {
-        return "Cek sisa stok untuk $a $b";
-    }
-);
-
-//Route parameter dengan regular expression
-Route::get('/user1/{id}', function ($id) {
-    return "Tampilkan user dengan id = $id";
-})->where('id', '[0-9]+');
-
-Route::get('/user2/{id}', function ($id) {
-    return "Tampilkan user dengan id = $id";
-})->where('id', '[A-Z]{2}[0-9]+');
-
-//Route redirect
-Route::get('/hubungi-kami', function () {
-    return "<h1>Hubungi Kami</h1>";
-});
-
-Route::redirect('/contact-us', 'hubungi-kami');
-
-//Route Group
-Route::prefix('admin')->group(function () {
-    Route::get('/mahasiswa', function () {
-        return "<h1>Daftar mahasiswa</h1>";
-    });
-
-    Route::get('/dosen', function () {
-        return "<h1>Daftar Dosen</h1>";
-    });
-
-    Route::get('/karyawan', function () {
-        return "<h1>Daftar Karyawan</h1>";
-    });
-});
-
-// //Route Fallback
-// Route::fallback(function () {
-//     return "Maaf, alamat tidak ditemukan";
-// });
-
-// //Route priority
-// Route::get('/buku/1', function () {
-//     return "buku ke-1";
-// });
-
-// Route::get('/buku/1', function () {
-//     return "buku saya ke-1";
-// });
-
-// Route::get('/buku/1', function () {
-//     return "buku kita ke-1";
-// });
-
-Route::get('/buku/{a}', function ($a) {
-    return "buku ke-$a";
-});
-
-Route::get('/buku/{a}', function ($a) {
-    return "buku saya ke-$a";
-});
-
-Route::get('/buku/{a}', function ($a) {
-    return "buku kita ke-$a";
-});
-
-//membuat view
-Route::get('/home', function () {
-    return view('halaman_home');
-});
-
-Route::get('/mahasiswa', function () {
-    $nama = 'Tya Kirana Putri';
-    $nilai = [80, 64, 30, 76, 95];
-    return view('kampus.mahasiswa', compact('nama', 'nilai'));
-});
+Route::get('/mahasiswa', [App\Http\Controller\PageControllers::class, 'tampil']);
