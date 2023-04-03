@@ -12,29 +12,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+use App\Http\Controllers\admin\PageController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PageController::class, 'index']);
 
-Route::get('mahasiswa', function () {
-    $arrMahasiswa = ["Luhut", "Jokowi", "Vladimir Putin", "Lisa Permata"];
-    return view('mahasiswa')->with('mahasiswa', $arrMahasiswa);
-});
+Route::get('/mahasiswa', [PageController::class, 'tampil']);
 
-Route::get('dosen', function () {
-    $arrDosen = ["Maya, M.M", "Prof. Silvia Nst, M.Farm", "Dr. Umar Agustinus", "Dr. Syahrial, M.kom"];
-    return view('dosen')->with('dosen', $arrDosen);
-});
+Route::get('/coba-facade', [PageController::class, 'cobaFacade']);
 
-Route::get('gallery', function () {
-    return view('gallery');
-});
-
-Route::get('admin', function () {
-    return view('admin');
-});
-
-Route::get('/', [App\Http\Controller\PageControllers::class, 'index']);
-
-Route::get('/mahasiswa', [App\Http\Controller\PageControllers::class, 'tampil']);
+Route::get('/coba-class', [PageController::class, 'cobaClass']);
